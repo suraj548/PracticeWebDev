@@ -1,7 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt')
-const User = require('../models/user')
+const User = require('../models/user');
+const user = require('../models/user');
+
+
+router.get('/',(req,res)=>{
+    user.find({},(err,allUsers)=>{
+        if(err)
+            res.json({message:'Error in fetching data'});
+        else    
+            res.json(allUsers);
+    })
+})
 router.post('/register', async (req, res) => {
     let user = await User.findOne({ email: req.body.email });
 
@@ -36,7 +47,7 @@ router.post('/login',async (req,res)=>{
         }
     }
 
-
+ 
 })
 
 module.exports = router;
