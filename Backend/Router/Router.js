@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
         password: req.body.password
     });
     await user.save();
-    res.send(user);
+    res.send(true);
 }
 });
 router.post('/login',async (req,res)=>{
@@ -40,10 +40,10 @@ router.post('/login',async (req,res)=>{
         Upass=req.body.password
         const compare = await bcrypt.compare(Upass,DPass)
         if(compare){
-            res.send('Welcome')
+            res.send(true)
         }
         else{
-            res.send('Wrong Password')
+            res.send(false)
         }
     }
 

@@ -8,22 +8,28 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-	
-	userList:Array<User>
+	BASE_URL='http://localhost:3000/routes'
+	newUser:{name:string,email: string; password: string} ;
+	returningUser:{ email: string; password: string; } 
 
 	constructor(private http: HttpClient) {
+		this.newUser = {name:"",email: "" ,password: ""} ;
+		this.returningUser = {email: "", password: ""}
+		
 		console.log("products Data service invoked");
-    	this.userList=new Array<User>(); 
-   		let u1 = new User('suraj','suraj@548','1234');
-   		let u2 = new User('kiran','kiran@548','1234');
-    	this.userList.push(u1);
-    	this.userList.push(u2);
+    	
 	}
 	getUsers():Observable<User[]>{
 		//Ajax calls to fetch the list of users
-		return this.http.get<User[]>('http://localhost:3000/routes'); //was not working with cors because wrong url
+		return this.http.get<User[]>(this.BASE_URL); //was not working with cors because wrong url
 	  }
-	getUserList(){
-		return this.userList;
+
+	  login(user:{email:string, password:string}){
+		return this.http.post(this.BASE_URL+'/login', user)
 	  }
-}
+
+	  register(users:{name:string,email:string,password:string}){
+		return this.http.post(this.BASE_URL+'/register', users)
+	  }
+
+} 

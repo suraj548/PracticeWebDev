@@ -3,14 +3,18 @@
 <div class="container">
 <form #signupForm="ngForm" (ngSubmit)="onSubmit()" >
     
+    <label for="firstname">First Name</label>
+    <input type="text" id="firstname" name="firstname" [(ngModel)]="this.userService.newUser.name"/><br/>
+
     <label for="email">Email</label>
-    <input type="email" id="email" name="email" [(ngModel)]="email"/><br/>
+    <input type="email" id="email" name="email" [(ngModel)]="this.userService.newUser.email"/><br/>
 
     <label for="password">Password</label>
-    <input type="password" id="password" name="password" [(ngModel)]="password"/><br/>
+    <input type="password" id="password" name="password" [(ngModel)]="this.userService.newUser.password"/><br/>
 	
     <button type="submit" >Submit</button>
-   
+    <button type="button" (click)="resetForm()">Reset</button>
+
 </form>
 
 </div>

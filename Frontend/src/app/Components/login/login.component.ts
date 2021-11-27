@@ -8,21 +8,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'] 
 })
 export class LoginComponent implements OnInit {
+  router: any;
  
-   email : string | undefined
-  password : string | undefined
-  constructor() { }
+  //email : string | undefined
+  //password : string | undefined 
+  constructor(public userService: UserService) { }
  
   ngOnInit(): void {
 
   }
  
   Onsave():void{
-    
-    alert('login sucessfull')
-    
-	
+    this.userService.login(this.userService.returningUser).subscribe(
+      data => {
+				if(data === true) {
+          alert('login sucessfull')
+        } // redirect to the appropriate page
+				else{
+           alert('login not sucessfull')
+        }
+			},
+			error => {
+				console.log(error)
+				//alert('Problem with connection')
+			}
+    )
 	}
+
+  resetForm(): void {
+		this.userService.returningUser = {
+			email: "",
+			password: ""
+		}
+	}
+
 }
 
 

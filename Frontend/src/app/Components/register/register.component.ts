@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from './../../user-data.service';
+import { UserService } from 'src/app/user-data.service';
+
+
 
 @Component({
 	selector: 'register',
@@ -13,7 +15,7 @@ export class  RegisterComponent implements OnInit {
 	email : string | undefined
 	password : string | undefined
 	
-	constructor() {
+	constructor(public userService: UserService) {
 
 	}
 
@@ -23,6 +25,22 @@ export class  RegisterComponent implements OnInit {
 
 
 	onSubmit(){
-		alert("Details saved")
+		this.userService.register(this.userService.newUser).subscribe(data => {
+			if(data === true) {
+				alert('Data stored')
+			} // redirect to the appropriate page
+		},
+		error => {
+			console.log(error)
+			alert('Problem in saving the data')
+		})
+	}
+
+	resetForm(): void {
+		this.userService.newUser={
+			name:"",
+			email: "",
+			password: ""
+		}
 	}
 }
