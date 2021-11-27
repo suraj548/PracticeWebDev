@@ -15,7 +15,8 @@ export class  RegisterComponent implements OnInit {
 	email : string | undefined
 	password : string | undefined
 	
-	constructor(public userService: UserService) {
+	
+	constructor(public userService: UserService,private router:Router) {
 
 	}
 
@@ -27,14 +28,18 @@ export class  RegisterComponent implements OnInit {
 	onSubmit(){
 		this.userService.register(this.userService.newUser).subscribe(data => {
 			if(data === true) {
-				alert('Data stored')
+				alert('Data stored,now you are redirected to login')
+				this.router.navigate(['/login'])
 			} // redirect to the appropriate page
+			else{
+				alert('user exists')
+			}
 		},
 		error => {
 			console.log(error)
 			alert('Problem in saving the data')
 		})
-	}
+	} 
 
 	resetForm(): void {
 		this.userService.newUser={

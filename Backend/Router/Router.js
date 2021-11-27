@@ -2,11 +2,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt')
 const User = require('../models/user');
-const user = require('../models/user');
-
-
+//const user = require('../models/user');
+const product = require('../models/product')
 router.get('/',(req,res)=>{
-    user.find({},(err,allUsers)=>{
+    User.find({},(err,allUsers)=>{
         if(err)
             res.json({message:'Error in fetching data'});
         else    
@@ -17,7 +16,8 @@ router.post('/register', async (req, res) => {
     let user = await User.findOne({ email: req.body.email });
 
     if (user) {
-        return res.status(400).send('That user already exisits!');
+        res.send(false)
+       // return res.status(400).send('That user already exisits!');
     } 
     else {
     // Insert the new user if they do not exist yet
@@ -50,4 +50,12 @@ router.post('/login',async (req,res)=>{
  
 })
 
+router.get('/products',(req,res)=>{
+    product.find({},(err,allProducts)=>{
+        if(err)
+            res.json({message:'Error in fetching data'});
+        else    
+            res.json(allProducts);
+    })
+})
 module.exports = router;

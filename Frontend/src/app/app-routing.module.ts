@@ -1,3 +1,4 @@
+import { ProductsComponent } from './Components/products/products.component';
 import { UserListComponent } from './Components/user-list/user-list.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
     path:'user-list',
     component:UserListComponent
   },
+  {
+    path:'product-list',
+    component:ProductsComponent
+  }
 ];
 
 @NgModule({

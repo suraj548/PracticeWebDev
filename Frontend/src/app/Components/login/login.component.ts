@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'] 
 })
 export class LoginComponent implements OnInit {
-  router: any;
+  
  
   //email : string | undefined
   //password : string | undefined 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService,private router:Router) { }
  
   ngOnInit(): void {
 
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.userService.returningUser).subscribe(
       data => {
 				if(data === true) {
-          alert('login sucessfull')
+         alert('login sucessfull')
+         this.router.navigate(['/product-list'])
         } // redirect to the appropriate page
 				else{
            alert('login not sucessfull')

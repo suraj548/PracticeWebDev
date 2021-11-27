@@ -10,11 +10,13 @@ export class UserListComponent implements OnInit {
   
 
   users:Array<User> | undefined
+  user:Array<User> | undefined
+  
   constructor(private userList:UserService) {
    }
 
+   
   
-   user:Array<User> | undefined
 
   ngOnInit(): void {
     //this.user = this.userList.getUserList()
