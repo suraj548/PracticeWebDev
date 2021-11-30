@@ -26,10 +26,10 @@ User.pre('save',async function(next){
         next(error)
     }
 })
-/*User.methods.isValidP = async function(password){
-    const users = this
-    const compare = await bcrypt.compare(password,users.password)
-    return compare
-}*/
+User.methods.isValidPassword=async function(password){
+    const users = this;
+    const compare = await bcrypt.compare(password,users.password);
+    return compare;
+}
 var user = mongoose.model('User',User,'users')
 module.exports = user
