@@ -1,8 +1,13 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {User} from './User'
 import { Observable } from 'rxjs';
 
+type userInfo={
+	email:string,
+	name:string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,26 +15,43 @@ import { Observable } from 'rxjs';
 export class UserService {
 	BASE_URL='http://localhost:3000/routes'
 	newUser:{name:string,email: string; password: string} ;
-	returningUser:{ email: string; password: string; } 
-
-	constructor(private http: HttpClient) {
+	returningUser:{ email: string; password: string }  
+	constructor(private http: HttpClient,private router:Router) {
 		this.newUser = {name:"",email: "" ,password: ""} ;
 		this.returningUser = {email: "", password: ""}
-		
-		console.log("products Data service invoked");
+		console.log("products Data service invoked");  
     	
 	}
 	getUsers():Observable<User[]>{
 		//Ajax calls to fetch the list of users
-		return this.http.get<User[]>(this.BASE_URL); //was not working with cors because wrong url
+		return this.http.get<User[]>(this.BASE_URL+'/users'); //was not working with cors because wrong url
 	  }
-
-	  login(user:{email:string, password:string}){
-		return this.http.post(this.BASE_URL+'/login', user)
+	login(user:{email:string, password:string}){
+		let a =  this.http.post<{token:string}>(this.BASE_URL+'/login', user)
+		console.log(a)
+		return a
 	  }
+	
+	loggedIn(){
+		return !!localStorage.getItem('token') 
+	}
+	getToken(){
+		return localStorage.getItem('token')
+	}
+	logOut(){
+		localStorage.removeItem('token')
+		this.router.navigate(['/'])
 
+	}
+	profile(){
+		return this.http.get<userInfo>(this.BASE_URL+'/profile')
+	}
+ 
 	  register(users:{name:string,email:string,password:string}){
 		return this.http.post(this.BASE_URL+'/register', users)
 	  }
 
-} 
+	  /*userProfileInformation(){
+		return this.http.get<User>(this.BASE_URL+'/users');
+	}*/
+}  

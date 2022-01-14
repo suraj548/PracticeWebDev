@@ -1,2 +1,4 @@
-<app-menu></app-menu>
+<app-menu *ngIf="uServ.loggedIn()"></app-menu>
+<app-starting-page *ngIf="!uServ.loggedIn()"></app-starting-page>
+<a class="nav-link" style="cursor: pointer" *ngIf="uServ.loggedIn()" (click)="uServ.logOut()">LogOut</a>
 <router-outlet></router-outlet>

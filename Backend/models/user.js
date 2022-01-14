@@ -24,7 +24,7 @@ User.pre('save',async function(next){
         next()
     }catch(error){
         next(error)
-    }
+    } 
 })
 User.methods.isValidPassword=async function(password){
     const users = this;

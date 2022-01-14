@@ -9,20 +9,15 @@ import { User } from 'src/app/User';
 export class UserListComponent implements OnInit {
   
 
-  users:Array<User> | undefined
-  user:Array<User> | undefined
-  
-  constructor(private userList:UserService) {
+  userList: Array<User> | undefined;
+  constructor(private userservice:UserService) {
+
    }
-
-   
-  
-
+ 
   ngOnInit(): void {
-    //this.user = this.userList.getUserList()
-    this.userList.getUsers().subscribe(users=>{
-      this.user=users;
-    },error=>console.log(error))
+    this.userservice.getUsers().subscribe(users=>{
+      this.userList=users;
+    },error=>console.log("Error in fetching data"))
   }
-
+ 
 }

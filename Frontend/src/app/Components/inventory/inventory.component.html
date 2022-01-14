@@ -1,0 +1,17 @@
+<h1>Inventory</h1>
+
+<div class="container">
+<form #inventoryForm="ngForm" (ngSubmit)="onSubmit()" >
+    
+    <label for="id">id</label>
+    <input type="text" id="id" name="id" [(ngModel)]="this.productList.newProduct.id"/><br/>
+
+    <label for="name">name</label>
+    <input type="text" id="name" name="name" [(ngModel)]="this.productList.newProduct.name"/><br/>
+
+    <label for="price">Price</label>
+    <input type="text" id="price" name="price" [(ngModel)]="this.productList.newProduct.price"/><br/>
+	
+    <button type="submit" >Submit</button>
+</form> 
+</div>

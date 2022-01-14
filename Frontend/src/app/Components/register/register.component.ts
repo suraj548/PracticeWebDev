@@ -30,8 +30,10 @@ export class  RegisterComponent implements OnInit {
 			if(data === true) {
 				alert('Data stored,now you are redirected to login')
 				this.router.navigate(['/login'])
+				console.log(data)
 			} // redirect to the appropriate page
 			else{
+				console.log(data)
 				alert('user exists')
 			}
 		},

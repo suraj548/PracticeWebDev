@@ -1,5 +1,6 @@
+const { string } = require('mathjs');
 const mongoose = require('mongoose');
-const Product = new mongoose.Schema({
+const Message = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
@@ -9,10 +10,10 @@ const Product = new mongoose.Schema({
         type: String,
         required: true
     },
-    price: {
-        type: Number,
+    desc: {
+        type: String,
         required: true,
     }
 }) 
-var product = mongoose.model('Product',Product,'products')
-module.exports = product
+var message = mongoose.model('Message',Message,'message')
+module.exports = message

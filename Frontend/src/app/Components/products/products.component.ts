@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
 //import { Products } from './../../Products';
 import { ProductDataService } from './../../product-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Products } from 'src/app/Products';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -10,16 +12,20 @@ import { Products } from 'src/app/Products';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private productList:ProductDataService) { }
+  @Output() notify = new EventEmitter()
+
+  constructor(public productList:ProductDataService) { }
   product:Array<Products> | undefined
   products:Array<Products> | undefined
   
   ngOnInit(): void {
-    this.productList.getProducts().subscribe(products=>{
+    
+    this.productList.getProducts().subscribe(products=>{ //products is being returned by the data-service
       this.product=products;
-    },error=>console.log(error))
+    },error=>console.log(error)) 
   }
- 
+   
+
 }
 
  

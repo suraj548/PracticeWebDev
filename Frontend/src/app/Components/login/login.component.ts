@@ -15,18 +15,20 @@ export class LoginComponent implements OnInit {
   constructor(public userService: UserService,private router:Router) { }
  
   ngOnInit(): void {
-
-  }
+ 
+  }   
  
   Onsave():void{
     this.userService.login(this.userService.returningUser).subscribe(
       data => {
-				if(data === true) {
+				if(data) { 
+          localStorage.setItem('token',data.token)
          alert('login sucessfull')
-         this.router.navigate(['/product-list'])
+        // console.log(data.token)
+        // this.router.navigate(['/profile'])
         } // redirect to the appropriate page
-				else{
-           alert('login not sucessfull')
+        else{
+          alert("Wrong password or username")
         }
 			},
 			error => {
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
 				//alert('Problem with connection')
 			}
     )
+    this.resetForm()
 	}
 
   resetForm(): void {
