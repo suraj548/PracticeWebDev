@@ -1,0 +1,27 @@
+form{
+    border: 5px solid gray;
+    width: 50%;
+}
+.cont{
+    padding: 16px;
+}
+input[type=text],input[type=password],input[type=email]{
+    width: 30%;
+    padding: 12px,20px; /*space between elements border and content */
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid gray;
+    box-sizing: border-box;
+}
+button{
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px; 
+    margin: 8px 4px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+}
+button:hover{
+    opacity: 0.9;
+}

@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 				if(data) { 
           localStorage.setItem('token',data.token)
          alert('login sucessfull')
+         this.router.navigate(['/profile'])
         // console.log(data.token)
         // this.router.navigate(['/profile'])
         } // redirect to the appropriate page

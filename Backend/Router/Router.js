@@ -7,7 +7,7 @@ const product = require('../models/product');
 const message = require('../models/msg')
 const passport = require('passport');
 const jwt = require('jsonwebtoken')
-var verifyToken=require('../auth/TokenVerification')
+//var verifyToken=require('../auth/TokenVerification')
 //const user = require('../models/user');
 router.get('/users',(req,res)=>{
     User.find({},(err,allUsers)=>{
@@ -180,5 +180,7 @@ router.get('/profile',function(req,res){
 router.get('/logout',function(req,res){
     return res.send({auth:false,token:null})
 })
+
+
 
 module.exports = router;

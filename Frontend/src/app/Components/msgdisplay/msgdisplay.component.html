@@ -1,10 +1,8 @@
-<p>msgdisplay works!</p>
-<table border='1'>
-    <thead><th>Id</th><th>Name</th><th>Description</th></thead>
-    <tr *ngFor='let list of msg'>
-        <td>{{list.id}}</td>
-        <td>{{list.name}}</td> 
-        <td>{{list.desc}}</td>
-        </tr>
-         
-</table>
+<!-- <p>msgdisplay works!</p> -->
+    <li *ngFor='let list of msg' >
+    <div class="cont"> <p><b>Id:</b> {{list.id}}<br>
+        <b>Name of the Device:</b> {{list.name}} <br>
+        <b>Description:</b> {{list.desc}}
+    </p>
+    </div>
+    </li>

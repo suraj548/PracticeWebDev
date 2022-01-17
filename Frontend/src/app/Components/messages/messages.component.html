@@ -1,15 +1,17 @@
+<h1>Add Message</h1>
 <div class="container">
 <form #msgForm="ngForm" (ngSubmit)="onSave()" >
     
     <label for="id">id</label>
-    <input type="text" id="id" name="id" [(ngModel)]="this.msgList.newInfo.id"/><br/>
+    <input type="text" id="id" name="id" placeholder="Add a id Ex:1,2,.." [(ngModel)]="this.msgList.newInfo.id"/><br/>
 
     <label for="name">name</label>
-    <input type="text" id="name" name="name" [(ngModel)]="this.msgList.newInfo.name"/><br/>
+    <input type="text" id="name" name="name" placeholder="Name" [(ngModel)]="this.msgList.newInfo.name"/><br/>
 
     <label for="price">Price</label>
-    <input type="text" id="price" name="price" [(ngModel)]="this.msgList.newInfo.desc"/><br/>
+    <input type="text" id="price" name="price" placeholder="Price" [(ngModel)]="this.msgList.newInfo.desc"/><br/>
 	
     <button type="submit" >Submit</button>
 </form> 
 </div>
+ 

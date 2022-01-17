@@ -14,11 +14,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { MessagesComponent } from './Components/messages/messages.component';
 
 const routes: Routes = [
-  /*{
+  {
     path:'',
     pathMatch:'full',
-    component:StartingPageComponent
-  },*/
+    component:MsgdisplayComponent
+  },
   {
     path:'login',
     component:LoginComponent
