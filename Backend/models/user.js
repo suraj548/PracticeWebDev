@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
+var message=require('./msg');
+const { string } = require('mathjs');
 const User = new mongoose.Schema({
     name: {
         type: String,

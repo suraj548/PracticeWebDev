@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt')
 const User = require('../models/user');
 //const user = require('../models/user');
 const product = require('../models/product');
 const message = require('../models/msg')
 const passport = require('passport');
 const jwt = require('jsonwebtoken')
-//var verifyToken=require('../auth/TokenVerification')
+var verifyToken=require('../auth/token');
+const { prod } = require('mathjs');
 //const user = require('../models/user');
 router.get('/users',(req,res)=>{
     User.find({},(err,allUsers)=>{
@@ -38,7 +38,7 @@ router.post('/products', async (req, res) => {
         if (prod) {
             res.send(false)
           }  // return res.status(400).send('That user already exisits!'); 
-        
+      
         else {
                 prod = new product({
                 id: req.body.id,
@@ -48,6 +48,7 @@ router.post('/products', async (req, res) => {
             await prod.save();
             res.send(true);
     }
+    console.log(prod)
  });
 
  router.get('/message',(req,res)=>{
@@ -59,22 +60,22 @@ router.post('/products', async (req, res) => {
     })
 })
 
- router.post('/message', async (req, res) => {
+ router.post('/message',verifyToken,async (req, res) => {
     let info = await message.findOne({ id: req.body.id });
             
         if (info) {
             res.send(false)
           }  // return res.status(400).send('That user already exisits!'); 
         
-        else {
-                prod = new message({
-                id: req.body.id,
-                name: req.body.name,
-                desc: req.body.desc
-            });
-            await prod.save();
-            res.send(true);
-    }
+          else {
+            prod = new message({
+            id: req.body.id,
+            name: req.body.name,
+            desc: req.body.desc
+        });
+        await prod.save();
+        res.send(true);
+}
  });
 
 router.post('/register',   
@@ -88,7 +89,7 @@ router.post('/login',
             async (req,res,next)=>{
                 passport.authenticate(
                     'login',
-                    async(err,user,info)=>{
+                    async(err,user)=>{
                         try{
                             if(err||!user){
                                // const error = new Error('An error occured')
@@ -150,36 +151,15 @@ router.delete('/products/delete/:id',(req,res)=>{
     })
 })*/
 
-router.get('/profile',function(req,res){
-   // var token = req.headers['x-access-token']
-    if(!req.headers.authorization)
-        return res.send('no token provided')
-    let token = req.headers.authorization.split(' ')[1]
-    if(token === 'null'){
-        return res.send('Unauthorized request')
-    }
-    jwt.verify(token,'TOP_SECRET',function(err,decoded){
+router.get('/profile',verifyToken,function(req,res,next){
+    User.findById(req.userId,{password:0},function(err,u){
         if(err)
-            res.send(false)
-        else{
-           id = decoded.user
-           User.findById(id,
-                            {password:0},
-                            function(err,u){
-                                if(err)
-                                    return res.send(err)
-                                if(!u)
-                                    return res.send("No user found")
-                            
-                             return res.send(u)
-                        })
-        }
+            return res.send(false)
+        res.send(u)
+      // console.log(u)
     })
-}  )
-
-router.get('/logout',function(req,res){
-    return res.send({auth:false,token:null})
 })
+
 
 
 
