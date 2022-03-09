@@ -84,8 +84,10 @@ router.post('/register',
         async(req,res)=>{
           
             let shop_no = await user.findOne({shopno:req.body.shopno})
-            if(shop_no)
-                res.send("This shop is registered");
+            if(shop_no || err){
+                res.send("This shop is allready registered");
+                //console.log('err')
+            }
             else{
 
                 new_shop = new user({

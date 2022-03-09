@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 type userInfo={
 	email:string,
-	name:string
+	Fname:string
 }
 
 @Component({
@@ -13,12 +13,12 @@ type userInfo={
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user:userInfo={email:"",name:""}
+  user:userInfo={email:"",Fname:""}
   constructor(private userSer:UserService,private router:Router) { 
     this.userSer.profile().subscribe(
       result=>{
         if(this.userSer.loggedIn()){ 
-          this.user=result
+          this.user.Fname
           console.log(result)
         }
        if(!this.userSer.loggedIn()){

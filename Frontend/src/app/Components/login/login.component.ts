@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   resetForm(): void {
 		this.userService.returningUser = {
-			email: "",
+			Shopno: "",
 			password: ""
 		}
 	}

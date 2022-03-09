@@ -45,7 +45,9 @@ export class  RegisterComponent implements OnInit {
 
 	resetForm(): void {
 		this.userService.newUser={
-			name:"",
+			Fname:"",
+			Lname:"",
+			Shopno:"",
 			email: "",
 			password: ""
 		}

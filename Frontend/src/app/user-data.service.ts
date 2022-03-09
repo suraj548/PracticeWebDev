@@ -14,11 +14,11 @@ type userInfo={
 })
 export class UserService {
 	BASE_URL='http://localhost:3000/routes'
-	newUser:{name:string,email: string; password: string} ;
-	returningUser:{ email: string; password: string }  
+	newUser:{Fname:string,Lname:string,Shopno:string,email: string; password: string} ;
+	returningUser:{ Shopno: string; password: string }  
 	constructor(private http: HttpClient,private router:Router) {
-		this.newUser = {name:"",email: "" ,password: ""} ;
-		this.returningUser = {email: "", password: ""}
+		this.newUser = {Fname:"",Lname:"",Shopno:"",email: "" ,password: ""} ;
+		this.returningUser = {Shopno: "", password: ""}
 		console.log("products Data service invoked");  
     	
 	}
@@ -26,7 +26,7 @@ export class UserService {
 		//Ajax calls to fetch the list of users
 		return this.http.get<User[]>(this.BASE_URL+'/users'); //was not working with cors because wrong url
 	  }
-	login(user:{email:string, password:string}){
+	login(user:{Shopno:string, password:string}){
 		let a =  this.http.post<{token:string}>(this.BASE_URL+'/login', user)
 		console.log(a)
 		return a
@@ -47,7 +47,7 @@ export class UserService {
 		return this.http.get<userInfo>(this.BASE_URL+'/profile')
 	}
  
-	  register(users:{name:string,email:string,password:string}){
+	  register(users:{Fname:string,Lname:string,Shopno:string,email:string,password:string}){
 		return this.http.post(this.BASE_URL+'/register', users)
 	  }
 
