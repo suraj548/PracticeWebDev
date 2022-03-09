@@ -3,10 +3,18 @@ const bcrypt = require('bcrypt')
 var message=require('./msg');
 const { string } = require('mathjs');
 const User = new mongoose.Schema({
-    name: {
+    Fname: {
         type: String,
         required: true,
         
+    },
+    Lname:{
+        type:String,
+        required:true
+    },
+    Shopno:{
+        type:String,
+        required:true
     },
     email: {
         type: String,

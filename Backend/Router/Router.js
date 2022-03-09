@@ -8,6 +8,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken')
 var verifyToken=require('../auth/token');
 const { prod } = require('mathjs');
+const user = require('../models/user');
 //const user = require('../models/user');
 router.get('/users',(req,res)=>{
     User.find({},(err,allUsers)=>{
@@ -79,9 +80,25 @@ router.post('/products', async (req, res) => {
  });
 
 router.post('/register',   
-        passport.authenticate('register',{session:false}),
+        /*passport.authenticate('register',{session:false}),*/
         async(req,res)=>{
-           return res.send(true)
+          
+            let shop_no = await user.findOne({shopno:req.body.shopno})
+            if(shop_no)
+                res.send("This shop is registered");
+            else{
+
+                new_shop = new user({
+                    Fname:req.body.Fname,
+                    Lname:req.body.Lname,
+                    Shopno:req.body.Shopno,
+                    email:req.body.email,
+                    password:req.body.password
+                })
+                await new_shop.save();
+                res.send(true)
+            }
+
     }
 )
 

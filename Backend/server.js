@@ -24,7 +24,7 @@ app.use('/routes',users)
 app.use('/routes',passport.authenticate('jwt', {session:false}), authRoutes)
 app.listen(port, () => console.log(`Example app listening on port port!`))
 
-mongoose.connect('mongodb://localhost:27017/userdb')
+mongoose.connect('mongodb://localhost:27017/shopdb')
     .then(() => console.log('Now connected to MongoDB!')) 
     .catch(err => console.error('Something went wrong', err)); 
 

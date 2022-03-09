@@ -4,32 +4,32 @@ const UserModel = require('../models/user');
 const JWTstrategy=require("passport-jwt").Strategy
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 module.exports = function (passport){
-	passport.use(
-		'register',
-		new localStrategy( 
-			{
-				usernameField: 'email',
-				passwordField: 'password',
-		 		session: false,
-				passReqToCallback: true
-			},
-			async (req, email, password, done) => {
-				try {
-					let duplicateUser = await UserModel.findOne({ email: req.body.email })
-                        if(duplicateUser) {
-							return done(null,false) //done is a callback  
-						}
-						if(!duplicateUser){
-							const user = await UserModel.create({"name": req.body.name,email, password });
-							console.log(user)
-							return done(null, user);}
-				} catch (error) {
-					//console.log(error)
-					done(error);
-				}
-			}
-		)
-	);
+	// passport.use(
+	// 	'register',
+	// 	new localStrategy( 
+	// 		{
+	// 			usernameField: 'email',
+	// 			passwordField: 'password',
+	// 	 		session: false,
+	// 			passReqToCallback: true
+	// 		},
+	// 		async (req, Shopno, password, done) => {
+	// 			try {
+	// 				let duplicateUser = await UserModel.findOne({ Shopno : req.body.Shopno })
+    //                     if(duplicateUser) {
+	// 						return done(null,false) //done is a callback  
+	// 					}
+	// 					if(!duplicateUser){
+	// 						const user = await UserModel.create({"Fname": req.body.fname,"Lname":req.body.Lname,"email":req.body.email,password });
+	// 						console.log(user)
+	// 						return done(null, user);}
+	// 			} catch (error) {
+	// 				//console.log(error)
+	// 				done(error);
+	// 			}
+	// 		}
+	// 	)
+	// );
 
 	passport.use(
 		'login',
