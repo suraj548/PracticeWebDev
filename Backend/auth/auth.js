@@ -35,13 +35,14 @@ module.exports = function (passport){
 		'login',
 		new localStrategy(
 			{
-				usernameField:'email',
+				usernameField:'Shopno',
 				passwordField:'password'
 			},
-			async (email,password,done)=>{
+			async (Shopno,password,done)=>{
 				try{
-					const user=await UserModel.findOne({email})
+					const user=await UserModel.findOne({Shopno})
 					if(!user){
+						//console.log("WW")
 						return done(null,false,{message:"user doesnot exists"})
 					}
 					const validate=await user.isValidPassword(password)

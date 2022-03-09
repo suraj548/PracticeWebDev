@@ -111,6 +111,7 @@ router.post('/login',
                             if(err||!user){
                                // const error = new Error('An error occured')
                                 //return next(Error)
+                              //  console.log("w");
                                 return res.send(false)
                             }
                             req.login(
